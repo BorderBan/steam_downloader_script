@@ -1,3 +1,21 @@
+"""
+This script provides functionality to download Steam Workshop items using SteamCMD.
+Functions:
+- download(pairs: list) -> None:
+    Downloads workshop items given a list of (appid, contentid) tuples using SteamCMD.
+    Each tuple must contain the application ID and the content ID of the workshop item.
+- fetch_contentid(url: str) -> int:
+    Extracts and returns the content ID from a Steam Workshop URL.
+- fetch_appid(contentid: int) -> int:
+    Fetches and returns the application ID associated with a given content ID by querying the Steam Web API.
+Usage:
+- The script can be run interactively. It prompts the user to input one or more Steam Workshop URLs.
+- For each URL, it extracts the content ID, fetches the corresponding app ID, and prepares a list of (appid, contentid) pairs.
+- The download function can then be used to download the specified workshop items.
+Requirements:
+- requests library
+- steamcmd installed and available in the system PATH
+"""
 import requests
 from urllib.parse import urlparse, parse_qs
 import os
