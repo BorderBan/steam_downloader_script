@@ -26,10 +26,12 @@ def download(pairs: list) -> None:
     """Usage: [(appid1, contentid1), (appid2, contentid2), ...]"""
     download_list = ""
     for pair in pairs:
+        print(f"downloading {pair}")
         if not (isinstance(pair, tuple) and len(pair) == 2):
             raise ValueError("Each item must be a tuple (appid, contentid)")
         appid, contentid = pair
-        download_list += f"+workshop_download_item {appid} {contentid}"
+        download_list += f"+workshop_download_item {appid} {contentid} "
+    print(f"steamcmd +login anonymous {download_list}+quit")
     os.system(f"steamcmd +login anonymous {download_list} +quit")
 
 def fetch_contentid(url: str) -> int:
@@ -62,3 +64,5 @@ if __name__ == "__main__":
         contentid = fetch_contentid(url)
         appid = fetch_appid(contentid)
         pairs.append((appid, contentid))
+    print(pairs)
+    download(pairs)
